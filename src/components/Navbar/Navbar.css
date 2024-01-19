@@ -1,0 +1,15 @@
+.Navbar {
+	height: 90px;
+	background-color: darkturquoise;
+	display: flex;
+	justify-content: space-around;
+
+	h1 {
+		color: black;
+	}
+
+	input {
+		height: 35px;
+		align-self: center;
+	}
+}
