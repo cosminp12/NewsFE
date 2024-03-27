@@ -9,7 +9,7 @@ const strTrim = (string, length) => {
 		string;
 }
 
-export default function Body({ searchInput }) {
+export default function Body({ searchInput, cathegory }) {
 	console.log('Rendering with', searchInput);
 	const [news, setNews] = useState(null);
 	const [loadErr, setLoadErr] = useState(null);
@@ -17,7 +17,10 @@ export default function Body({ searchInput }) {
 	useEffect(() => {
 		let ignore = false;
 
-		fetch(`http://192.168.1.7:8081/news${searchInput?.length > 0 ? '?match=' + searchInput : ''}`, {
+		fetch('http://localhost:8081/api/news?' + new URLSearchParams({
+			match: searchInput,
+			cathegory: cathegory
+		}).toString(), {
 			mode: 'cors'
 		}).then(response => response.json())
 		.then((response) => {
@@ -40,7 +43,7 @@ export default function Body({ searchInput }) {
 		return () => {
 			ignore = true;
 		};
-	}, [searchInput]);
+	}, [searchInput, cathegory]);
 
 	return(
 		<div className='Body'>

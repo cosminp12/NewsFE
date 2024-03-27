@@ -2,13 +2,27 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './components/App/App';
+import createStore from 'react-auth-kit/createStore';
+import AuthProvider from 'react-auth-kit';
+import { BrowserRouter } from "react-router-dom";
 import reportWebVitals from './reportWebVitals';
 
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
+const store = createStore({
+	authName:'_auth',
+	authType:'localstorage',
+  });
+
+
 root.render(
-  <React.StrictMode>
-    <App/>
-  </React.StrictMode>
+	<React.StrictMode>
+		<AuthProvider store={store}>
+			<BrowserRouter>
+				<App/>
+			</BrowserRouter>
+		</AuthProvider>
+	</React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
